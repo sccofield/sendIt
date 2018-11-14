@@ -1,0 +1,32 @@
+{
+  "name": "sendit",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start:dev": "nodemon --exec babel-node ./server ",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sccofield/sendIt.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sccofield/sendIt/issues"
+  },
+  "homepage": "https://github.com/sccofield/sendIt#readme",
+  "dependencies": {
+    "express": "^4.16.4",
+    "morgan": "^1.9.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.1.6",
+    "@babel/node": "^7.0.0",
+    "@babel/preset-env": "^7.1.5",
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "nodemon": "^1.18.6"
+  }
+}
