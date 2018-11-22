@@ -8,6 +8,7 @@
 				"code": 80
 			}
 		],
-		"no-tabs": 0
+		"no-tabs": 0,
+		"consistent-return": 0
 	}
 }

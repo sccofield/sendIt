@@ -8,6 +8,7 @@ const createTables = () => {
       lastname VARCHAR(128) NOT NULL,
       email VARCHAR(128) UNIQUE NOT NULL,
 			username VARCHAR(128) NOT NULL,
+			password VARCHAR(128) NOT NULL,
       registered DATE NOT NULL,
       isAdmin BOOLEAN
   )`;
@@ -26,6 +27,7 @@ const createTables = () => {
       currentLocation VARCHAR(128)
 )`;
 
+  // eslint-disable-next-line import/no-named-as-default-member
   pool.query(users)
     .then((res) => {
       // eslint-disable-next-line no-console
@@ -38,6 +40,7 @@ const createTables = () => {
       pool.end();
     });
 
+  // eslint-disable-next-line import/no-named-as-default-member
   pool.query(parcels)
     .then((res) => {
       // eslint-disable-next-line no-console
