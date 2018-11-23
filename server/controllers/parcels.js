@@ -288,7 +288,7 @@ class ParcelController {
               return response.status(400).json({
                 status: 400,
                 data: [{
-                  message: err,
+                  message: updateError,
                 }],
               });
             }
@@ -301,6 +301,50 @@ class ParcelController {
               },
             });
           });
+      });
+    });
+  }
+
+  /**
+   * Set current location of order
+   * @param {object} request express request object
+   * @param {object} response express response object
+   *
+   * @returns {json} json
+   * @memberof ParcelController
+   */
+  static setLocation(request, response) {
+    const { currentLocation } = request.body;
+    const { parcelId } = request.params;
+    if (!currentLocation) {
+      return response.status(400).json({
+        status: 400,
+        data: [{
+          message: 'PLease input current location',
+        }],
+      });
+    }
+    pool.connect((err, client, done) => {
+      const query = 'UPDATE parcels set currentLocation=$1 where id=$2 RETURNING id, currentLocation';
+      const values = [currentLocation, parcelId];
+      client.query(query, values, (error, result) => {
+        done();
+        if (error || result.rows.length === 0) {
+          return response.status(400).json({
+            status: 400,
+            data: [{
+              message: `Parcel with the id ${parcelId} does not exist`,
+            }],
+          });
+        }
+        return response.status(201).json({
+          status: 201,
+          data: {
+            id: result.rows[0].id,
+            currentLocation: result.rows[0].currentlocation,
+            message: 'current Location changed',
+          },
+        });
       });
     });
   }
