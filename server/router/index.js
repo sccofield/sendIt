@@ -23,5 +23,7 @@ router.post('/auth/login', Users.login);
 
 router.get('/parcels', verifyToken, verifyAdmin, Parcels.getAllOrders);
 
+router.get('/parcels/:parcelId', Parcels.getOrder);
+
 
 export default router;
