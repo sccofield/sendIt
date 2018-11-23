@@ -38,4 +38,9 @@ router.put('/parcels/:parcelId/currentlocation',
   verifyAdmin,
   Parcels.setLocation);
 
+router.put('/parcels/:parcelId/status',
+  verifyToken,
+  verifyAdmin,
+  Parcels.changeStatus);
+
 export default router;

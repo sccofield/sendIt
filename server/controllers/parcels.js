@@ -348,6 +348,50 @@ class ParcelController {
       });
     });
   }
+
+  /**
+   * Change status of parcel order
+   * @param {object} request express request object
+   * @param {object} response express response object
+   *
+   * @returns {json} json
+   * @memberof ParcelController
+   */
+  static changeStatus(request, response) {
+    const { status } = request.body;
+    const { parcelId } = request.params;
+    if (!status) {
+      return response.status(400).json({
+        status: 400,
+        data: [{
+          message: 'PLease input status',
+        }],
+      });
+    }
+    pool.connect((err, client, done) => {
+      const query = 'UPDATE parcels set status=$1 where id=$2 RETURNING id, status';
+      const values = [status, parcelId];
+      client.query(query, values, (error, result) => {
+        done();
+        if (error || result.rows.length === 0) {
+          return response.status(400).json({
+            status: 400,
+            data: [{
+              message: `Parcel with the id ${parcelId} does not exist`,
+            }],
+          });
+        }
+        return response.status(201).json({
+          status: 201,
+          data: {
+            id: result.rows[0].id,
+            status: result.rows[0].status,
+            message: 'status changed',
+          },
+        });
+      });
+    });
+  }
 }
 
 export default ParcelController;
