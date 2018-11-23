@@ -29,7 +29,13 @@ router.get('/users/:userId/parcels', Parcels.getUserOrders);
 
 router.put('/parcels/:parcelId/cancel', verifyToken, Parcels.cancelOrder);
 
-router.put('/parcels/:parcelId/destination', verifyToken, Parcels.changeDestination);
+router.put('/parcels/:parcelId/destination',
+  verifyToken,
+  Parcels.changeDestination);
 
+router.put('/parcels/:parcelId/currentlocation',
+  verifyToken,
+  verifyAdmin,
+  Parcels.setLocation);
 
 export default router;
