@@ -1,8 +1,18 @@
 import moment from 'moment';
 import pool from '../models/database';
 
-
+/**
+ * @class ParcelController
+ */
 class ParcelController {
+  /**
+   * creates a new parcel order
+   * @param {object} request express request object
+   * @param {object} response express response object
+   *
+   * @returns {json} json
+   * @memberof ParcelController
+   */
   static addParcels(request, response) {
     if (!request.body.weight) {
       return response.status(400).json({
@@ -63,6 +73,35 @@ class ParcelController {
             message: 'Order created',
             id: result.rows[0].id,
           }],
+        });
+      });
+    });
+  }
+
+  /**
+   * Get all parcel orders
+   * @param {object} request express request object
+   * @param {object} response express response object
+   *
+   * @returns {json} json
+   * @memberof ParcelController
+   */
+  static getAllOrders(request, response) {
+    pool.connect((err, client, done) => {
+      const query = 'SELECT * FROM parcels';
+      client.query(query, (error, result) => {
+        done();
+        if (error) {
+          return response.status(400).json({
+            status: 400,
+            data: [{
+              message: 'Invalid login details, email or passsword wrong',
+            }],
+          });
+        }
+        return response.status(200).json({
+          status: 200,
+          data: result.rows,
         });
       });
     });
