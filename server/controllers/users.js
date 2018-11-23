@@ -12,8 +12,18 @@ const salt = bcrypt.genSaltSync(10);
 
 const secret = process.env.SECRET;
 
-
+/**
+ * @class UserController
+ */
 class UserController {
+  /**
+   * creates new user
+   * @param {object} request express request object
+   * @param {object} response express response object
+   *
+   * @returns {json} json
+   * @memberof UserController
+   */
   static signup(request, response) {
     if (!request.body.firstName) {
       return response.status(400).json({
@@ -104,11 +114,11 @@ class UserController {
           });
         }
         const user = result.rows[0];
-        console.log('>>>>>>>>>>>>>>>>>>>>>>>>>', secret);
         const token = jwt.sign({
           id: user.id,
           username: user.username,
           email: user.email,
+          isAdmin: user.isAdmin,
         }, secret);
         const { password, registered, ...userdata } = user;
 
@@ -123,6 +133,14 @@ class UserController {
     });
   }
 
+  /**
+   * login user
+   * @param {object} request express request object
+   * @param {object} response express response object
+   *
+   * @returns {json} json
+   * @memberof UserController
+   */
   static login(request, response) {
     if (!request.body.email) {
       return response.status(400).json({
@@ -165,6 +183,7 @@ class UserController {
             id: user.id,
             username: user.username,
             email: user.email,
+            isAdmin: user.isadmin,
           }, secret);
           const { password, registered, ...userdata } = user;
           return response.status(200).json({

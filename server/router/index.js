@@ -2,6 +2,7 @@ import { Router } from 'express';
 import Parcels from '../controllers/parcels';
 import Users from '../controllers/users';
 import verifyToken from '../middlewares/verifyToken';
+import verifyAdmin from '../middlewares/verifyAdmin';
 
 const router = Router();
 
@@ -19,6 +20,8 @@ router.post('/parcels', verifyToken, Parcels.addParcels);
 router.post('/auth/signup', Users.signup);
 
 router.post('/auth/login', Users.login);
+
+router.get('/parcels', verifyToken, verifyAdmin, Parcels.getAllOrders);
 
 
 export default router;
