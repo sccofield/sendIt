@@ -240,6 +240,70 @@ class ParcelController {
       });
     });
   }
+
+  /**
+   * Change destination of order
+   * @param {object} request express request object
+   * @param {object} response express response object
+   *
+   * @returns {json} json
+   * @memberof ParcelController
+   */
+  static changeDestination(request, response) {
+    const { parcelId } = request.params;
+    pool.connect((err, client, done) => {
+      const query = 'SELECT * FROM parcels WHERE id =$1';
+      const values = [parcelId];
+      client.query(query, values, (error, result) => {
+        done();
+        if (error || result.rows.length === 0) {
+          return response.status(400).json({
+            status: 400,
+            data: [{
+              message: `Parcel with the id ${parcelId} does not exist`,
+            }],
+          });
+        }
+        const recipe = result.rows[0];
+        if (recipe.status === 'delivered' || recipe.status === 'cancelled') {
+          return response.status(401).json({
+            status: 401,
+            data: [{
+              message: 'You can no longer change the destination of this order',
+            }],
+          });
+        }
+        if (recipe.placedby !== request.decoded.id) {
+          return response.status(401).json({
+            status: 401,
+            data: [{
+              message: 'You don\'t have permission to change destination of this order',
+            }],
+          });
+        }
+        client.query('UPDATE parcels set toLocation=$1 where id=$2 RETURNING id, toLocation',
+          [request.body.toLocation, parcelId], (updateError, updateResult) => {
+            done();
+            if (updateError) {
+              return response.status(400).json({
+                status: 400,
+                data: [{
+                  message: err,
+                }],
+              });
+            }
+            return response.status(201).json({
+              status: 201,
+              data: {
+                id: updateResult.rows[0].id,
+                to: updateResult.rows[0].tolocation,
+                message: 'destination changed',
+              },
+            });
+          });
+      });
+    });
+  }
 }
 
 export default ParcelController;

@@ -29,5 +29,7 @@ router.get('/users/:userId/parcels', Parcels.getUserOrders);
 
 router.put('/parcels/:parcelId/cancel', verifyToken, Parcels.cancelOrder);
 
+router.put('/parcels/:parcelId/destination', verifyToken, Parcels.changeDestination);
+
 
 export default router;
