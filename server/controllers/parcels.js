@@ -39,7 +39,7 @@ class ParcelController {
       });
     }
     const data = {
-      placedBy: 12347,
+      placedBy: request.decoded.id,
       weight: request.body.weight,
       weightmetric: 'kg',
       sentOn: moment().format(),
@@ -136,6 +136,46 @@ class ParcelController {
             status: 400,
             data: [{
               message: `Parcel with the id ${parcelId} does not exist`,
+            }],
+          });
+        }
+        return response.status(200).json({
+          status: 200,
+          data: result.rows,
+        });
+      });
+    });
+  }
+
+  /**
+   * Get all users parcel deliver order
+   * @param {object} request express request object
+   * @param {object} response express response object
+   *
+   * @returns {json} json
+   * @memberof ParcelController
+   */
+  static getUserOrders(request, response) {
+    const { userId } = request.params;
+    pool.connect((err, client, done) => {
+      const query = 'SELECT * FROM parcels WHERE placedBy =$1';
+      const values = [userId];
+      client.query(query, values, (error, result) => {
+        done();
+        if (error) {
+          return response.status(400).json({
+            status: 400,
+            data: [{
+              message: `User with the id ${userId} does not exist`,
+            }],
+          });
+        }
+        const recipe = result.rows[0];
+        if (!recipe) {
+          return response.status(400).json({
+            status: 400,
+            data: [{
+              message: 'The user has no parcel order',
             }],
           });
         }

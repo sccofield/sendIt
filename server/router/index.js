@@ -25,5 +25,7 @@ router.get('/parcels', verifyToken, verifyAdmin, Parcels.getAllOrders);
 
 router.get('/parcels/:parcelId', Parcels.getOrder);
 
+router.get('/users/:userId/parcels', Parcels.getUserOrders);
+
 
 export default router;
