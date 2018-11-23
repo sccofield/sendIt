@@ -95,7 +95,47 @@ class ParcelController {
           return response.status(400).json({
             status: 400,
             data: [{
-              message: 'Invalid login details, email or passsword wrong',
+              message: 'error',
+            }],
+          });
+        }
+        return response.status(200).json({
+          status: 200,
+          data: result.rows,
+        });
+      });
+    });
+  }
+
+  /**
+   * Get all specific parcel deliver order
+   * @param {object} request express request object
+   * @param {object} response express response object
+   *
+   * @returns {json} json
+   * @memberof ParcelController
+   */
+  static getOrder(request, response) {
+    const { parcelId } = request.params;
+    pool.connect((err, client, done) => {
+      const query = 'SELECT * FROM parcels WHERE id =$1';
+      const values = [parcelId];
+      client.query(query, values, (error, result) => {
+        done();
+        if (error) {
+          return response.status(400).json({
+            status: 400,
+            data: [{
+              message: `Parcel with the id ${parcelId} does not exist`,
+            }],
+          });
+        }
+        const recipe = result.rows[0];
+        if (!recipe) {
+          return response.status(400).json({
+            status: 400,
+            data: [{
+              message: `Parcel with the id ${parcelId} does not exist`,
             }],
           });
         }
