@@ -186,6 +186,60 @@ class ParcelController {
       });
     });
   }
+
+  /**
+   * Cancel parcel deliver order
+   * @param {object} request express request object
+   * @param {object} response express response object
+   *
+   * @returns {json} json
+   * @memberof ParcelController
+   */
+  static cancelOrder(request, response) {
+    const { parcelId } = request.params;
+    pool.connect((err, client, done) => {
+      const query = 'SELECT * FROM parcels WHERE id =$1';
+      const values = [parcelId];
+      client.query(query, values, (error, result) => {
+        done();
+        if (error || result.rows.length === 0) {
+          return response.status(400).json({
+            status: 400,
+            data: [{
+              message: `Parcel with the id ${parcelId} does not exist`,
+            }],
+          });
+        }
+        const recipe = result.rows[0];
+        if (recipe.placedby !== request.decoded.id) {
+          return response.status(401).json({
+            status: 401,
+            data: [{
+              message: 'You don\'t have permission to cancel that order',
+            }],
+          });
+        }
+        client.query('UPDATE parcels set status=$1 where id=$2',
+          ['cancelled', parcelId], (updateError, updateResult) => {
+            done();
+            if (updateError) {
+              return response.status(400).json({
+                status: 400,
+                data: [{
+                  message: err,
+                }],
+              });
+            }
+            return response.status(201).json({
+              status: 201,
+              data: {
+                message: 'order cancelled',
+              },
+            });
+          });
+      });
+    });
+  }
 }
 
 export default ParcelController;
