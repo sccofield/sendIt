@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node ./server",
+    "start": "babel-node ./server",
     "start:dev": "nodemon --exec babel-node ./server ",
     "test": "echo \"Error: no test specified\" && exit 1",
     "migrate": "babel-node ./server/models/migrations createTables"
@@ -27,13 +27,13 @@
     "jsonwebtoken": "^8.4.0",
     "moment": "^2.22.2",
     "morgan": "^1.9.1",
-    "pg": "^7.6.1"
-  },
-  "devDependencies": {
+    "pg": "^7.6.1",
     "@babel/cli": "^7.1.5",
     "@babel/core": "^7.1.6",
     "@babel/node": "^7.0.0",
-    "@babel/preset-env": "^7.1.6",
+    "@babel/preset-env": "^7.1.6"
+  },
+  "devDependencies": {
     "babel-eslint": "^8.2.6",
     "eslint": "^5.9.0",
     "eslint-config-airbnb-base": "^13.1.0",
