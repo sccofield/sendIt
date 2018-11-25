@@ -3,7 +3,7 @@ import { Pool } from 'pg';
 require('dotenv').config();
 
 const pool = new Pool({
-  connectionString: 'postgresql://localhost/send-it?user=admin&password=admin',
+  connectionString: process.env.DATABASE_URL,
 });
 
 pool.on('connect', () => {
