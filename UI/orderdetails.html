@@ -48,14 +48,19 @@
         <li id="login-menu"><a href="./login.html">Login</a></li>
         <li id="signup-menu"><a href="./registration.html">Sign up</a></li>
         <li class="hide" id="dashboard-menu"><a href="./dashboard.html">Dashoard</a></li>
-        <li class="hide" id="logout-menu" onclick="logout()"><a href="">Log out</a></li>
+        <li class="hide" id="logout-menu" onclick="logout(event)"><a href="#">Log out</a></li>
       </ul>
 
     </div>
   </section>
   <section class="page-title container">
-    <h2 class="title">Login page</h2>
-    <p>You have to login to be able to place a delivery order.</p>
+    <h2 class="title">Order details</h2>
+    <p>You can place your delivery order here.</p>
+  </section>
+
+  <section class="success container">
+    <div id="success-message">
+    </div>
   </section>
 
   <section class="error container">
@@ -63,25 +68,40 @@
     </div>
   </section>
 
-  <section class="form container">
-    <form onsubmit="login(event)">
+  <section class="order container">
+    <div class="order-form form">
+      <h2>Order Details</h2>
+      <span class="order-row">
+        <p>Order id: <span id="order-id"></span> </p>
+        <p>Status: <span id="order-status"></span></p>
+      </span>
+      <span class="order-row">
+        <p>Date sent: <span id="order-date"></span></p>
+        <p>Current Location: <span id="order-current"></span></p>
+      </span>
+      <span class="order-row">
+        <p>From: <span id="order-from"></span></p>
+        <p>To: <span id="order-to"></span></p>
+      </span>
+      <button class="btn" onclick="cancelOrder()">Cancel Order</button>
+    </div>
+    <div class="order-summary form">
+      <form onsubmit="changeDestination(event)">
+        <div class="form-group">
+          <label for="firstname" class="form-label">Change destination</label>
+          <input id="to-location" class="form-input" type="text" placeholder="Enter new destination" required>
+        </div>
+        <button type="submit" id="submit" class="btn">Change destination</button>
+      </form>
 
+    </div>
+  </section>
 
-      <div class="form-group">
-        <label for="firstname" class="form-label">Email:</label>
-        <input id="login-email" class="form-input" type="text" placeholder="Enter email" name="email" required>
-      </div>
-      <div class="form-group">
-        <label for="firstname" class="form-label">Password:</label>
-        <input id="login-password" class="form-input" type="password" placeholder="Enter password" name="password"
-          required>
-      </div>
-
-
-      <button type="submit" id="submit" class="btn">Login</button>
-    </form>
+  <section class="container order-list">
 
   </section>
+
+
 
 
 
@@ -98,7 +118,7 @@
   </section>
 
   <script src="./js/index.js" async defer></script>
-  <script src="./js/login.js" async defer></script>
+  <script src="./js/orderdetails.js" async defer></script>
 
 </body>
 

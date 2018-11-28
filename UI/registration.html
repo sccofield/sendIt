@@ -45,10 +45,10 @@
           Send-it hub
         </li>
         <li><a href="./index.html">Home</a></li>
-        <li>Orders</li>
-        <li><a href="./login.html">Login</a></li>
-        <li><a href="./registration.html">Sign up</a></li>
-        <li>Signup</li>
+        <li id="login-menu"><a href="./login.html">Login</a></li>
+        <li id="signup-menu"><a href="./registration.html">Sign up</a></li>
+        <li class="hide" id="dashboard-menu"><a href="./dashboard.html">Dashoard</a></li>
+        <li class="hide" id="logout-menu" onclick="logout()"><a>Log out</a></li>
       </ul>
 
     </div>
@@ -58,34 +58,44 @@
     <p>You have to register to be able to place a delivery order.</p>
   </section>
 
+  <section class="error container">
+    <div id="error-message">
+    </div>
+  </section>
+
   <section class="form container">
-    <form>
+    <form onsubmit="registration(event)">
       <div class="form-group">
         <label for="firstname" class="form-label">First Name:</label>
-        <input class="form-input" type="text" placeholder="Enter First name" name="firstName" required>
+        <input id="register-firstName" class="form-input" type="text" placeholder="Enter First name" name="firstName"
+          required>
       </div>
       <div class="form-group">
         <label for="firstname" class="form-label">Last Name:</label>
-        <input class="form-input" type="text" placeholder="Enter last name" name="lastName" required>
+        <input id="register-lastName" class="form-input" type="text" placeholder="Enter last name" name="lastName"
+          required>
       </div>
       <div class="form-group">
         <label for="firstname" class="form-label">User Name:</label>
-        <input class="form-input" type="text" placeholder="Enter User name" name="userName" required>
+        <input id="register-username" class="form-input" type="text" placeholder="Enter User name" name="userName"
+          required>
       </div>
       <div class="form-group">
         <label for="firstname" class="form-label">Email:</label>
-        <input class="form-input" type="text" placeholder="Enter email" name="email" required>
+        <input id="register-email" class="form-input" type="email" placeholder="Enter email" name="email" required>
       </div>
       <div class="form-group">
         <label for="firstname" class="form-label">Password:</label>
-        <input class="form-input" type="text" placeholder="Enter password" name="password" required>
+        <input id="register-password" class="form-input" type="password" placeholder="Enter password" name="password"
+          required>
       </div>
       <div class="form-group">
         <label for="firstname" class="form-label">Confirm password:</label>
-        <input class="form-input" type="text" placeholder="confirm password" name="confirmPassword" required>
+        <input id="register-cPassword" class="form-input" type="password" placeholder="confirm password" name="confirmPassword"
+          required>
       </div>
 
-      <button type="submit" class="btn">Login</button>
+      <button id="submit" type="submit" class="btn">Login</button>
     </form>
 
   </section>
@@ -105,6 +115,8 @@
   </section>
 
   <script src="./js/index.js" async defer></script>
+  <script src="./js/registration.js" async defer></script>
+
 </body>
 
 </html>
