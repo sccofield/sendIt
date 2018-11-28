@@ -11,8 +11,10 @@ import jwt from 'jsonwebtoken';
 const verifyToken = (request, response, next) => {
   const { token } = request.headers;
   if (token) {
+    console.log(token);
     jwt.verify(token, process.env.SECRET, (err, decoded) => {
       if (err) {
+        console.log(err);
         return response.status(401).json({
           status: 401,
           data: {

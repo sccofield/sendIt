@@ -65,7 +65,12 @@ class ParcelController {
       client.query(query, values, (error, result) => {
         done();
         if (error) {
-          return response.status(400).json({ error });
+          return response.status(400).json({
+            status: 400,
+            data: [{
+              message: 'error',
+            }],
+          });
         }
         return response.status(201).json({
           status: 201,
@@ -233,7 +238,7 @@ class ParcelController {
             return response.status(201).json({
               status: 201,
               data: {
-                message: 'order cancelled',
+                message: 'Order cancelled succesfully',
               },
             });
           });

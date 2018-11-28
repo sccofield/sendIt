@@ -1,6 +1,14 @@
 {
 	"root": true,
 	"extends": "airbnb-base",
+	"globals": {
+		"localStorage": true,
+		"window": false,
+		"document": true,
+		"FormData": true,
+		"fetch": true,
+		"shallow": true
+	},
 	"rules": {
 		"max-len": [
 			"error",
