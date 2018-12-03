@@ -6,13 +6,8 @@ import verifyAdmin from '../middlewares/verifyAdmin';
 
 const router = Router();
 
-
 router.get('/', (req, res) => {
   res.send('hello sendit');
-});
-
-router.get('/about', (req, res) => {
-  res.send('hello sendit about now');
 });
 
 router.post('/parcels', verifyToken, Parcels.addParcels);

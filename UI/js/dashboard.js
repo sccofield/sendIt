@@ -1,7 +1,7 @@
 const newOrder = async (event) => {
   event.preventDefault();
   document.getElementById('submit').disabled = true;
-  const registerationUrl = 'http://localhost:8000/parcels';
+  const registerationUrl = 'https://mysendit-api.herokuapp.com/api/v1/parcels';
   const paragraph = document.createElement('P'); // Create a <p> element
 
   const data = {
@@ -43,9 +43,8 @@ const newOrder = async (event) => {
 
 
 const getUserOrders = async () => {
-  const userId = JSON.parse(localStorage.getItem('user'));
-  console.log(userId);
-  const registerationUrl = `http://localhost:8000/users/${userId.id}/parcels`;
+  const user = JSON.parse(localStorage.getItem('user'));
+  const registerationUrl = `https://mysendit-api.herokuapp.com/api/v1/users/${user.id}/parcels`;
 
   const response = await fetch(registerationUrl, {
     method: 'GET',

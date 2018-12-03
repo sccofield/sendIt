@@ -135,7 +135,7 @@ class UserController {
 
   /**
    * login user
-   * @param {object} request express request object
+   * @param {object} request express request  object
    * @param {object} response express response object
    *
    * @returns {json} json

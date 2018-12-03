@@ -13,6 +13,7 @@ const loginState = () => {
   const dashboard = document.getElementById('dashboard-menu');
   const logout = document.getElementById('logout-menu');
   if (localStorage.user) {
+    console.log(localStorage.user)
     signup.classList.add('hide');
     login.classList.add('hide');
     dashboard.classList.remove('hide');
@@ -26,8 +27,22 @@ const loginState = () => {
 };
 loginState();
 
-const logout = (event) => {
-  event.preventDefault();
-  window.location = './index.html';
+const adminMenu = () => {
+  let user;
+
+  if (localStorage.user) {
+    user = JSON.parse(localStorage.user)
+  }
+  const admin = document.getElementById('admin-menu');
+  console.log(user);
+
+  if (user && user.isadmin) {
+    admin.classList.remove('hide');
+  }
+}
+adminMenu();
+
+const logout = () => {
   localStorage.clear();
+  window.location.href = './index.html';
 };

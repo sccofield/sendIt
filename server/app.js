@@ -3,6 +3,9 @@ import logger from 'morgan';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import router from './router';
+import swaggerUi from 'swagger-ui-express';
+
+import swaggerDocument from './swagger.json';
 
 require('dotenv').config();
 
@@ -19,7 +22,10 @@ app.use(bodyParser.urlencoded({
   extended: true,
 }));
 
-app.use('/', router);
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
+app.use('/api/v1', router);
 
 
 export default app;
