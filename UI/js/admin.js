@@ -11,7 +11,6 @@ const getAllUserOrders = async () => {
       'Content-Type': 'application/json',
       token,
     },
-    mode: 'cors',
   });
 
 
