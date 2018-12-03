@@ -11,15 +11,16 @@ require('dotenv').config();
 
 // calling an instance of express
 const app = express();
-const corsOptions = {
-  origin: 'https://sccofield.github.io',
-  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
-}
-
-app.use(cors(corsOptions));
+app.use(cors());
 
 // logging all request to console using morgan
 app.use(logger('dev'));
+
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
