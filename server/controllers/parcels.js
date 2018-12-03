@@ -302,7 +302,7 @@ class ParcelController {
               data: {
                 id: updateResult.rows[0].id,
                 to: updateResult.rows[0].tolocation,
-                message: 'destination changed',
+                message: 'Destination changed',
               },
             });
           });
@@ -347,7 +347,7 @@ class ParcelController {
           data: {
             id: result.rows[0].id,
             currentLocation: result.rows[0].currentlocation,
-            message: 'current Location changed',
+            message: 'Current Location changed',
           },
         });
       });

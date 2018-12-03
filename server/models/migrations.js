@@ -1,4 +1,33 @@
+import bcrypt from 'bcryptjs';
+import moment from 'moment';
+
 import pool from './database';
+
+require('dotenv').config();
+
+const salt = bcrypt.genSaltSync(10);
+
+
+const userQuery = `INSERT INTO users(
+  firstname,
+  lastname,
+  email,
+  username,
+  password,
+  registered,
+  isAdmin
+) VALUES($1, $2, $3, $4, $5, $6, $7) RETURNING *`;
+
+const data = {
+  irstName: 'Mike',
+  lastName: 'Umanah',
+  email: 'mike@gmail.com',
+  username: 'mike',
+  password: bcrypt.hashSync('password', salt),
+  registered: moment().format(),
+  isAdmin: true,
+
+}
 
 const createTables = () => {
   const users = `CREATE TABLE IF NOT EXISTS
@@ -31,12 +60,10 @@ const createTables = () => {
   pool.query(users)
     .then((res) => {
       // eslint-disable-next-line no-console
-      console.log('done', res);
       pool.end();
     })
     .catch((err) => {
       // eslint-disable-next-line no-console
-      console.log('error', err);
       pool.end();
     });
 
@@ -44,19 +71,34 @@ const createTables = () => {
   pool.query(parcels)
     .then((res) => {
       // eslint-disable-next-line no-console
-      console.log('done', res);
       pool.end();
     })
     .catch((err) => {
       // eslint-disable-next-line no-console
-      console.log('error', err);
       pool.end();
     });
 };
 
+const dropDatabase = () => {
+  pool.query('DROP TABLE IF EXISTS parcels, users')
+    .then((res) => {
+      console.log('database droped')
+    })
+}
+
+const createAdmin = () => {
+  const values = Object.values(data);
+  pool.query(userQuery, values, (err, result) => {
+    if (err) {
+    }
+  })
+}
+
 
 module.exports = {
+  dropDatabase,
   createTables,
+  createAdmin
 };
 
 // eslint-disable-next-line import/no-extraneous-dependencies

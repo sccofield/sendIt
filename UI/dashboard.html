@@ -42,13 +42,14 @@
       </div>
       <ul class="close" id="nav">
         <li class="brand">
-          Send-it hub
+          <a href="./index.html">Send-it hub</a>
         </li>
         <li><a href="./index.html">Home</a></li>
         <li id="login-menu"><a href="./login.html">Login</a></li>
         <li id="signup-menu"><a href="./registration.html">Sign up</a></li>
         <li class="hide" id="dashboard-menu"><a href="./dashboard.html">Dashoard</a></li>
-        <li class="hide" id="logout-menu" onclick="logout(event)"><a href="#">Log out</a></li>
+        <li class="hide" id="logout-menu" onclick="logout()"><a href='./index.html'>Log out</a></li>
+        <li class="hide" id="admin-menu"><a href="./admin.html">Admin</a></li>
       </ul>
 
     </div>
@@ -69,34 +70,42 @@
   </section>
 
   <section class="order container">
-    <div class="order-form form">
+    <div class="order-summary form">
       <h2>New order</h2>
       <form onsubmit="newOrder(event)">
         <div class="form-group">
-          <label for="firstname" class="form-label">Weight in Kg:</label>
+          <label for="firstname" class="form-label bold">Weight in Kg:</label>
           <input id="order-weight" class="form-input" type="numer" placeholder="weight of item" name="weight" required>
         </div>
         <div class="form-group">
-          <label for="firstname" class="form-label">Shipping From:</label>
+          <label for="firstname" class="form-label bold">Shipping From:</label>
           <input id="order-from" class="form-input" type="text" placeholder="Shipping from address" name="shippingFrom"
             required>
         </div>
         <div class="form-group">
-          <label for="firstname" class="form-label">Shipping To:</label>
+          <label for="firstname" class="form-label bold">Shipping To:</label>
           <input id="order-to" class="form-input" type="text" placeholder="Shipping to address" name="shippingTo"
             required>
         </div>
         <button type="submit" id="submit" class="btn">Create order</button>
       </form>
-    </div>
-    <div class="order-summary form">
 
-      <h2>Order Summary</h2>
-      <p>Total Orders: <span id="totalOrders"></span></p>
-      <p>Orders delivered: <span id="deliveredOrders"></span></p>
-      <p>Orders cancelled: <span id="cancelledOrders"></span></p>
-      <p>Orders in transit: <span id="transitOrders"></span></p>
+
     </div>
+    <div class="order-form form">
+      <div id="map"></div>
+
+
+    </div>
+
+  </section>
+  <section class="container summary">
+    <h2>Order Summary</h2>
+    <p class="bold">Total Orders: <span id="totalOrders"></span></p>
+    <p class="bold">Orders delivered: <span id="deliveredOrders"></span></p>
+    <p class="bold">Orders cancelled: <span id="cancelledOrders"></span></p>
+    <p class="bold">Orders in transit: <span id="transitOrders"></span></p>
+
   </section>
 
   <section class="container order-list">
@@ -135,9 +144,11 @@
   <section class="footer">
     <p>Copyright @ 2018, All Right Reserved</p>
   </section>
-
+  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCXrz6_WL8C2ilCG1VZD7Nc3UfR5jGg8wM&libraries=places"></script>
   <script src="./js/index.js" async defer></script>
   <script src="./js/dashboard.js" async defer></script>
+  <script src="./js/map.js" async defer></script>
+
 
 </body>
 

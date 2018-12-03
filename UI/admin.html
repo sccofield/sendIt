@@ -56,8 +56,8 @@
     </div>
   </section>
   <section class="page-title container">
-    <h2 class="title">Order details</h2>
-    <p>You can place your delivery order here.</p>
+    <h2 class="title">Admin Dashoard</h2>
+    <p>You can view all orders made on this portal here.</p>
   </section>
 
   <section class="success container">
@@ -70,42 +70,45 @@
     </div>
   </section>
 
-  <section class="order container">
-    <div class="order-form form">
-      <h2>Order Details</h2>
-      <span class="order-row">
-        <p class="bold">Order id: <span id="order-id"></span> </p>
-        <p class="bold">Status: <span id="order-status"></span></p>
-      </span>
-      <span class="order-row">
-        <p class="bold">Date sent: <span id="order-date"></span></p>
-        <p class="bold">Current Location: <span id="order-current"></span></p>
-      </span>
-      <span class="order-row">
-        <p class="bold">From: <span id="order-from"></span></p>
-        <p class="bold">To: <span id="order-to"></span></p>
-      </span>
-      <button class="btn" onclick="cancelOrder()">Cancel Order</button>
-    </div>
-    <div class="order-summary form">
-      <h2>Change destination</h2>
-      <form onsubmit="changeDestination(event)">
-        <div class="form-group">
-          <label for="firstname" class="form-label bold">Change destination</label>
-          <input id="to-location" class="form-input" type="text" placeholder="Enter new destination" required>
-        </div>
-        <button type="submit" id="submit" class="btn">Change destination</button>
-      </form>
+  <section class="container order-list">
+    <h2>Order list</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Order Id</th>
+          <th>Weight</th>
+          <th>Date Sent</th>
+          <th>Shipped from</th>
+          <th>Shipped To</th>
+          <th>Current Location</th>
+          <th>Status</th>
+          <th>Details</th>
+        </tr>
+      </thead>
+      <tbody id="tablebody">
 
-    </div>
+      </tbody>
+    </table>
   </section>
+
+
+
+
+
+
+
+
+
+
+
+
 
   <section class="footer">
     <p>Copyright @ 2018, All Right Reserved</p>
   </section>
-  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCXrz6_WL8C2ilCG1VZD7Nc3UfR5jGg8wM&libraries=places"></script>
   <script src="./js/index.js" async defer></script>
-  <script src="./js/orderdetails.js" async defer></script>
+  <script src="./js/admin.js" async defer></script>
+
 
 </body>
 

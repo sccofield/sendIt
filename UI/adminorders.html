@@ -50,14 +50,13 @@
         <li class="hide" id="dashboard-menu"><a href="./dashboard.html">Dashoard</a></li>
         <li class="hide" id="logout-menu" onclick="logout()"><a href='./index.html'>Log out</a></li>
         <li class="hide" id="admin-menu"><a href="./admin.html">Admin</a></li>
-
       </ul>
 
     </div>
   </section>
   <section class="page-title container">
-    <h2 class="title">Order details</h2>
-    <p>You can place your delivery order here.</p>
+    <h2 class="title">Admin dashboard</h2>
+    <p>Admin dashboard for admin settings</p>
   </section>
 
   <section class="success container">
@@ -71,30 +70,31 @@
   </section>
 
   <section class="order container">
-    <div class="order-form form">
-      <h2>Order Details</h2>
-      <span class="order-row">
+    <div class="order-admin form">
+      <h2>Change Status</h2>
+      <form onsubmit="changeStatus(event)">
         <p class="bold">Order id: <span id="order-id"></span> </p>
-        <p class="bold">Status: <span id="order-status"></span></p>
-      </span>
-      <span class="order-row">
-        <p class="bold">Date sent: <span id="order-date"></span></p>
-        <p class="bold">Current Location: <span id="order-current"></span></p>
-      </span>
-      <span class="order-row">
-        <p class="bold">From: <span id="order-from"></span></p>
-        <p class="bold">To: <span id="order-to"></span></p>
-      </span>
-      <button class="btn" onclick="cancelOrder()">Cancel Order</button>
-    </div>
-    <div class="order-summary form">
-      <h2>Change destination</h2>
-      <form onsubmit="changeDestination(event)">
+        <p class="bold">user id: <span id="user-id"></span> </p>
+        <p class="bold">Current Status: <span id="status"></span> </p>
         <div class="form-group">
-          <label for="firstname" class="form-label bold">Change destination</label>
-          <input id="to-location" class="form-input" type="text" placeholder="Enter new destination" required>
+          <label for="firstname" class="form-label bold">Change status: </label>
+          <input id="new-status" class="form-input" type="text" placeholder="Change status" required>
         </div>
-        <button type="submit" id="submit" class="btn">Change destination</button>
+        <button type="submit" id="submit" class="btn">Change Status</button>
+      </form>
+
+    </div>
+    <div class="order-admin form">
+      <h2>Change current location</h2>
+      <form onsubmit="changeLocation(event)">
+        <p class="bold">From: <span id="order-from"></span> </p>
+        <p class="bold">To: <span id="order-to"></span> </p>
+        <p class="bold">Current Location: <span id="order-current"></span> </p>
+        <div class="form-group">
+          <label for="firstname" class="form-label bold">Change location: </label>
+          <input id="current-location" class="form-input" type="text" placeholder="Change current location" required>
+        </div>
+        <button type="submit" id="submit" class="btn">Change current location</button>
       </form>
 
     </div>
@@ -105,7 +105,7 @@
   </section>
   <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCXrz6_WL8C2ilCG1VZD7Nc3UfR5jGg8wM&libraries=places"></script>
   <script src="./js/index.js" async defer></script>
-  <script src="./js/orderdetails.js" async defer></script>
+  <script src="./js/adminorders.js" async defer></script>
 
 </body>
 
