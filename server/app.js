@@ -11,8 +11,12 @@ require('dotenv').config();
 
 // calling an instance of express
 const app = express();
+const corsOptions = {
+  origin: 'https://sccofield.github.io',
+  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+}
 
-app.use(cors());
+app.use(cors(corsOptions));
 
 // logging all request to console using morgan
 app.use(logger('dev'));
