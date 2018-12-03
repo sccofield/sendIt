@@ -79,7 +79,7 @@ const changeDestination = async (event) => {
   const data = {
     toLocation: document.getElementById('to-location').value,
   };
-  const changeDestinationUrl = `hhttps://mysendit-api.herokuapp.com/api/v1/parcels/${orderId}/destination`;
+  const changeDestinationUrl = `https://mysendit-api.herokuapp.com/api/v1/parcels/${orderId}/destination`;
   const response = await fetch(changeDestinationUrl, {
     method: 'PUT',
     headers: {
