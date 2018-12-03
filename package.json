@@ -10,6 +10,7 @@
     "createTable": "babel-node ./server/models/migrations createTables",
     "createAdmin": "babel-node ./server/models/migrations createAdmin",
     "migrate": "npm run dropTable && npm run createTable && npm run createAdmin",
+    "heroku-postbuild": "npm run migrate",
     "test": "NODE_ENV=TEST npm run migrate && NODE_ENV=TEST mocha ./server/__test__/*.js --compilers js:@babel/register --reporter spec --exit --timeout=5000",
     "coveralls": "nyc npm test && nyc report --reporter=text-lcov | coveralls"
   },
