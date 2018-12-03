@@ -1,7 +1,7 @@
 const login = async (event) => {
   event.preventDefault();
   document.getElementById('submit').disabled = true;
-  const registerationUrl = 'http:localhost:8000/api/v1/auth/login';
+  const registerationUrl = 'https://mysendit-api.herokuapp.com/api/v1/auth/login';
   const paragraph = document.createElement('P'); // Create a <p> element
 
   const data = {
