@@ -9,9 +9,16 @@ import swaggerDocument from './swagger.json';
 
 require('dotenv').config();
 
+const corsConfig = {
+  origin: ["https://sccofield.github.io"],
+  credentials: true,
+  methods: "GET,HEAD,OPTIONS,PUT,PATCH,POST,DELETE",
+  allowedHeaders: ['Content-Type']
+};
+
 // calling an instance of express
 const app = express();
-app.use(cors());
+app.use(cors(corsConfig));
 
 // logging all request to console using morgan
 app.use(logger('dev'));
@@ -31,6 +38,8 @@ app.use(bodyParser.urlencoded({
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use('/api/v1', router);
+
+app.options("*", cors(corsConfig));
 
 
 export default app;
