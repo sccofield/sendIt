@@ -57,6 +57,7 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay) {
     travelMode: 'DRIVING'
   }, function (response, status) {
     if (status === 'OK') {
+      directionsDisplay.setDirections(response);
       console.log(response)
     } else {
       console.log('Directions request failed due to ' + status);

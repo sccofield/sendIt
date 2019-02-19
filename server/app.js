@@ -11,7 +11,6 @@ require('dotenv').config();
 
 // calling an instance of express
 const app = express();
-
 app.use(cors());
 
 // logging all request to console using morgan
@@ -26,6 +25,5 @@ app.use(bodyParser.urlencoded({
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use('/api/v1', router);
-
 
 export default app;

@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.com/sccofield/sendIt.svg?branch=develop)](https://travis-ci.com/sccofield/sendIt)
+[![Build Status](https://travis-ci.org/sccofield/sendIt.svg?branch=develop)](https://travis-ci.org/sccofield/sendIt)
 [![Coverage Status](https://coveralls.io/repos/github/sccofield/sendIt/badge.svg?branch=develop)](https://coveralls.io/github/sccofield/sendIt?branch=develop)
 [![Maintainability](https://api.codeclimate.com/v1/badges/3c6d4555df5e2b8ffaf5/maintainability)](https://codeclimate.com/github/sccofield/sendIt/maintainability)
 
