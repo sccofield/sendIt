@@ -5,7 +5,7 @@ const paragraph = document.createElement('P'); // Create a <p> element
 
 
 const singleOrder = async () => {
-  const orderUrl = `hhttps://mysendit-api.herokuapp.com/api/v1/parcels/${orderId}`;
+  const orderUrl = `https://mysendit-api.herokuapp.com/api/v1/parcels/${orderId}`;
 
   const response = await fetch(orderUrl, {
     method: 'GET',
