@@ -2,7 +2,6 @@ const registration = async (event) => {
   event.preventDefault();
   document.getElementById('submit').disabled = true;
   const registerationUrl = 'https://mysendit-api.herokuapp.com/api/v1/auth/signup';
-  const paragraph = document.createElement('P'); // Create a <p> element
 
   const data = {
     firstName: document.getElementById('register-firstName').value,
@@ -14,9 +13,7 @@ const registration = async (event) => {
   };
 
   if (data.password !== data.confirmPassword) {
-    const message = document.createTextNode('Passwords do not match');
-    paragraph.appendChild(message);
-    document.getElementById('error-message').appendChild(paragraph);
+    document.getElementById('error-message').innerHTML = 'Passwords do not match';
   } else {
     const response = await fetch(registerationUrl, {
       method: 'POST',
@@ -33,9 +30,7 @@ const registration = async (event) => {
 
     const result = await response.json();
     if (result.status !== 201) {
-      const message = document.createTextNode(result.data[0].message);
-      paragraph.appendChild(message);
-      document.getElementById('error-message').appendChild(paragraph);
+      document.getElementById('error-message').innerHTML = result.data[0].message;
     } else {
       localStorage.setItem('token', result.data[0].token);
       localStorage.setItem('user', JSON.stringify(result.data[0].user));

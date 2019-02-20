@@ -2,7 +2,6 @@ const login = async (event) => {
   event.preventDefault();
   document.getElementById('submit').disabled = true;
   const registerationUrl = 'https://mysendit-api.herokuapp.com/api/v1/auth/login';
-  const paragraph = document.createElement('P'); // Create a <p> element
 
   const data = {
     email: document.getElementById('login-email').value,
@@ -25,9 +24,7 @@ const login = async (event) => {
   const result = await response.json();
   if (result.status !== 200) {
     console.log(result.data);
-    const message = document.createTextNode(result.data[0].message);
-    paragraph.appendChild(message);
-    document.getElementById('error-message').appendChild(paragraph);
+    document.getElementById('error-message').innerHTML = result.data[0].message;
   } else {
     localStorage.setItem('token', result.data[0].token);
     localStorage.setItem('user', JSON.stringify(result.data[0].user));
