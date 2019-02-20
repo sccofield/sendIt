@@ -4,8 +4,13 @@ const options = {
   componentRestrictions: { country: 'ng' },
 };
 
+let fromAddress = '';
+let toAddress = '';
 
-document.getElementById('order-from').value = '';
+
+// document.getElementById('order-from').value = '';
+
+
 
 const initAutocomplete = () => {
   const directionsService = new google.maps.DirectionsService();
@@ -13,6 +18,7 @@ const initAutocomplete = () => {
   const map = new google.maps.Map(document.getElementById('map'), {
     zoom: 7,
     center: { lat: 9.0765, lng: 7.3986 },
+    mapTypeControl: false
   });
   directionsDisplay.setMap(map);
 
@@ -26,6 +32,8 @@ const initAutocomplete = () => {
       document.getElementById('order-from').value = '';
     } else {
       document.getElementById('order-from').value = place.formatted_address;
+      fromAddress = place.place_id;
+      console.log(place)
     }
   });
 
@@ -36,9 +44,10 @@ const initAutocomplete = () => {
     if (!place.geometry) {
       document.getElementById('order-to').value = '';
     } else {
+      document.getElementById('order-to').value = place.formatted_address;
+      toAddress = place.place_id;
       console.log(place)
 
-      document.getElementById('order-to').value = place.formatted_address;
     }
   });
 
@@ -52,15 +61,18 @@ initAutocomplete();
 
 function calculateAndDisplayRoute(directionsService, directionsDisplay) {
   directionsService.route({
-    origin: document.getElementById('order-from').value,
-    destination: document.getElementById('order-to').value,
+    // origin: document.getElementById('order-from').value,
+    // destination: document.getElementById('order-to').value,
+    origin: 'ChIJDeXxz9sGURARHdkeGbaEpYc',
+    destination: 'ChIJ-9QZWvnjURARxBElh4Wj6gw',
     travelMode: 'DRIVING'
   }, function (response, status) {
     if (status === 'OK') {
       directionsDisplay.setDirections(response);
-      console.log(response)
+      console.log('response all good')
     } else {
-      console.log('Directions request failed due to ' + status);
+      console.log(response)
+      console.log('failling Directions request failed due to ' + status);
     }
   });
 }
