@@ -103,3 +103,25 @@ const changeDestination = async (event) => {
     document.getElementById('success-message').appendChild(paragraph);
   }
 };
+
+const initAutoComplete = () => {
+  const options = {
+    types: ['(cities)'],
+    componentRestrictions: { country: 'ng' },
+  };
+
+  const autocompleteFrom = new google.maps.places.Autocomplete(
+    (document.getElementById('to-location')), options,
+  );
+
+  autocompleteFrom.addListener('place_changed', () => {
+    place = autocompleteFrom.getPlace();
+    if (!place.geometry) {
+      document.getElementById('to-location').value = '';
+    } else {
+      document.getElementById('to-location').value = place.formatted_address;
+    }
+  });
+}
+initAutoComplete();
+

@@ -7,8 +7,8 @@
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="./css/style.css">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
-    crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+    integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 </head>
 
 <body>
@@ -78,7 +78,12 @@
         <p class="bold">Current Status: <span id="status"></span> </p>
         <div class="form-group">
           <label for="firstname" class="form-label bold">Change status: </label>
-          <input id="new-status" class="form-input" type="text" placeholder="Change status" required>
+          <select id="new-status" class="form-input">
+            <option value="placed">placed</option>
+            <option value="in-transit">in-transit</option>
+            <option value="delivered">delivered</option>
+          </select>
+          <!-- <input id="new-status" class="form-input" type="text" placeholder="Change status" required> -->
         </div>
         <button type="submit" id="submit" class="btn">Change Status</button>
       </form>
@@ -103,7 +108,8 @@
   <section class="footer">
     <p>Copyright @ 2018, All Right Reserved</p>
   </section>
-  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCXrz6_WL8C2ilCG1VZD7Nc3UfR5jGg8wM&libraries=places"></script>
+  <script type="text/javascript"
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCXrz6_WL8C2ilCG1VZD7Nc3UfR5jGg8wM&libraries=places"></script>
   <script src="./js/index.js" async defer></script>
   <script src="./js/adminorders.js" async defer></script>
 
